@@ -2,7 +2,7 @@ import streamlit as st
 import google.generativeai as genai
 
 st.set_page_config(page_title="On tap Ly 12 - AI", layout="centered")
-API_KEY=""
+API_KEY = st.secrets["GEMINI_API_KEY"]
 genai.configure(api_key="API_KEY")
 model=genai.GenerativeModel('gemini-1.5-flash')
 st.title("On Tap Kiem Tra Ly Lop 12")
