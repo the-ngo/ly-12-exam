@@ -3,7 +3,7 @@ import google.generativeai as genai
 
 st.set_page_config(page_title="On tap Ly 12 - AI", layout="centered")
 API_KEY=""
-genai.configure(api_key=API_KEY")
+genai.configure(api_key="API_KEY")
 model=genai.GenerativeModel('gemini-1.5-flash')
 st.title("On Tap Kiem Tra Ly Lop 12")
 st.write("Ung dung thong minh ho tro on tap bam sat ma tran de thi")
@@ -28,7 +28,7 @@ with tab2:
     "Phan 3 - Trac nghiem tra loi ngan (6 cau)",
     "Toan bo de kiem tra (Day du 3 phan)"])
   if st.button("Tao de on tap bang AI"):
-    with st.spinner("AI dang bien soan de on tap bam sat ma tran cho em ...")
+    with st.spinner("AI dang bien soan de on tap bam sat ma tran cho em ..."):
       prompt = f"Hay tao 1 de on tap mon Vat ly lop 12 phan {section}. Trinh bay ro rang cau hoi, cac dap an va chua khoang trong."
       response = model.generate_content(prompt)
       st.session_state['de_thi'] = response.text
@@ -36,7 +36,7 @@ with tab2:
       format_text = st.session_state.get('de_thi','')
       st.write(format_text)
       st.divider()
-      if st.button("Xem ket qua va huong dan giai")
+      if st.button("Xem ket qua va huong dan giai"):
         st.success("He thong da ghi nhan bai lam")
         st.markdown("### Phan tich dap an va loi giai chi tiet tu AI:")
         explain_prompt = f"Dua tren de thi vua tao, hay cung cap bang dap an chi tiet va huong dan giai thich tung cau that de hieu cho hoc sinh lop 12"
@@ -52,7 +52,7 @@ with tab2:
 with tab3:
   st.subheader("Theo doi su tien bo")
   role = st.radio("Ban la ai?",["Hoc sinh","Giao vien"])
-  if role == "Hoc sinh"
+  if role == "Hoc sinh":
     st.info(f"Lich su on tap cua hoc sinh **{name} ({cl})**. He thong dang luu vet cac bai lam cua em")
   else:
     password = st.text_input("Nhap ma giao vien:",type="password")
