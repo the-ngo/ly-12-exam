@@ -3,7 +3,7 @@ import google.generativeai as genai
 
 st.set_page_config(page_title="On tap Ly 12 - AI", layout="centered")
 API_KEY = st.secrets["GEMINI_API_KEY"]
-genai.configure(api_key="API_KEY")
+genai.configure(api_key=API_KEY)
 model=genai.GenerativeModel('gemini-1.5-flash')
 st.title("On Tap Kiem Tra Ly Lop 12")
 st.write("Ung dung thong minh ho tro on tap bam sat ma tran de thi")
