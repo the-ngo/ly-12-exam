@@ -1,6 +1,6 @@
 import streamlit as st
 import google.generativeai as genai
-import docx
+from docx import Document
 import json
 from datetime import datetime
 from streamlit_mic_recorder import mic_recorder
