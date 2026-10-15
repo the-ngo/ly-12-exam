@@ -311,8 +311,10 @@ with tab2:
                             "https://www.googleapis.com/auth/drive"
                         ]
                         
-                        # Tạo credentials từ file json
-                        creds = Credentials.from_service_account_file("credentials.json", scopes=scopes)
+                        # Đọc thông tin trực tiếp từ st.secrets thay vì đọc file json
+                        creds_dict = dict(st.secrets["gcp_service_account"])
+                        creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
+        
                         client = gspread.authorize(creds)
                         
                         # Mở Google Sheet và ghi dữ liệu
