@@ -313,6 +313,9 @@ with tab2:
                         
                         # Đọc thông tin trực tiếp từ st.secrets thay vì đọc file json
                         creds_dict = dict(st.secrets["gcp_service_account"])
+                        # [QUAN TRỌNG] Chuyển đổi các ký tự "\n" dạng text thành ngắt dòng thực sự cho private_key
+                        if "private_key" in creds_dict:
+                            creds_dict["private_key"] = creds_dict["private_key"].replace("\\n", "\n")
                         creds = Credentials.from_service_account_info(creds_dict, scopes=scopes)
         
                         client = gspread.authorize(creds)
