@@ -305,20 +305,29 @@ with tab2:
                 # Tự động lưu vào Google Sheets (Chỉ lưu 1 lần khi nộp)
                 if not st.session_state.get('saved_to_sheets', False):
                     try:
-                        scope = ["[https://spreadsheets.google.com/feeds](https://spreadsheets.google.com/feeds)", "[https://www.googleapis.com/auth/drive](https://www.googleapis.com/auth/drive)"]
-                        creds = Credentials.from_service_account_file("credentials.json", scopes=scope)
+                        # Khai báo chuẩn các scope cần thiết cho Google Sheets & Drive
+                        scopes = [
+                            "https://www.googleapis.com/auth/spreadsheets",
+                            "https://www.googleapis.com/auth/drive"
+                        ]
+                        
+                        # Tạo credentials từ file json
+                        creds = Credentials.from_service_account_file("credentials.json", scopes=scopes)
                         client = gspread.authorize(creds)
+                        
+                        # Mở Google Sheet và ghi dữ liệu
                         sheet = client.open("LichSuOnTapVatLy12").sheet1
                         now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
                         
                         sheet.append_row([now_str, name, cl, current_exam, section, final_score])
+                        
                         st.session_state['saved_to_sheets'] = True
                         st.balloons()
                         st.toast("✅ Đã tự động lưu kết quả vào hệ thống!", icon="📊")
+                        
                     except Exception as e:
-                        st.error(f"Luu ket qua loi, Chi tiết lỗi: {e}")
-                        pass
-
+                        st.error(f"Lưu kết quả lỗi, Chi tiết lỗi: {e}")
+                        
             # --- CỬA SỔ CHAT ĐA LƯỢT (THU ÂM TRỰC TIẾP AN TOÀN) ---
             st.markdown("---")
             st.subheader("💬 Góc thắc mắc cùng AI (Hỏi - Đáp linh hoạt)")
