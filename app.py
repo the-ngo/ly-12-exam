@@ -310,11 +310,13 @@ with tab2:
                         client = gspread.authorize(creds)
                         sheet = client.open("LichSuOnTapVatLy12").sheet1
                         now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        
                         sheet.append_row([now_str, name, cl, current_exam, section, final_score])
                         st.session_state['saved_to_sheets'] = True
                         st.balloons()
                         st.toast("✅ Đã tự động lưu kết quả vào hệ thống!", icon="📊")
                     except Exception as e:
+                        st.error(f"Luu ket qua loi, Chi tiết lỗi: {e}")
                         pass
 
             # --- CỬA SỔ CHAT ĐA LƯỢT (THU ÂM TRỰC TIẾP AN TOÀN) ---
